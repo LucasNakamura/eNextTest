@@ -21,15 +21,12 @@ function loadJSON(callback) {
    http_request.overrideMimeType("application/json");
    http_request.onreadystatechange  = function(){
       if (http_request.readyState == 4)
-      {
 		callback(http_request.responseText);
-      }
    }
    http_request.send(null);
  }
 
  function callLightbox(output){
-  	//document.getElementById('white_content').innerHTML=output;
   	document.getElementById('white_content').style.display='block';
   	document.getElementById('black_overlay').style.display='block';
   	document.getElementById('close_lightbox').onclick = function () {
@@ -45,7 +42,7 @@ function closeLightbox(){
 }
 
 function createProd(callback){
-  var produtos;
+  var products;
 	loadJSON(function(response) {
 
 		var actual_JSON = JSON.parse(response);
@@ -60,18 +57,17 @@ function createProd(callback){
 			'<b>'+ actual_JSON.potions[i].name + ' - </b>'+
 			'<span>$'+ actual_JSON.potions[i].price + '</span></div>';
 
-			document.getElementById("produtos").appendChild(newElement);
+			document.getElementById("products").appendChild(newElement);
 		}
-		produtos = document.querySelectorAll(".prod");
-		 if (typeof callback === "function") {
-			callback(produtos);
-		}
+		products = document.querySelectorAll(".prod");
+		 if (typeof callback === "function")
+			callback(products);		
 	});
 }
 
-function bindLightbox(produtos){
-	for (var i = produtos.length - 1;  i >= 0;  --i) {
-		document.getElementById(produtos[i].id).onclick = function () {
+function bindLightbox(products){
+	for (var i = products.length - 1;  i >= 0;  --i) {
+		document.getElementById(products[i].id).onclick = function () {
 			var myid = this.id;
 			var newContent = "";
 
@@ -98,7 +94,7 @@ function bindLightbox(produtos){
 				elementCart[0].setAttribute("price", actual_Potion.price);
 
 				callLightbox(newContent);
-				});
+			});
 		};
 	}
 }

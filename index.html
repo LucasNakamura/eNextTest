@@ -7,7 +7,7 @@
         <div id="white_content" style="display: none;">
             <div id="close_lightbox">X</div>
             <img id="imagebox" src="images/bulgeye-potion.png">
-            <div id="description">
+            <div id="descriptions">
                 <p class="feature_titles" id="potionName">Bulgeye Potion</p>
                 <p class="feature_titles">Use/Effect:</p>
                 <p class="feature_desc" id="effects">It affects one's eyes, causing them to swell</p>
@@ -17,14 +17,14 @@
                 <p class="feature_desc price_value" id="price">$19.99</p>
             </div>
             <div id="addCartItem"></div>
-            <ngcart-addtocart class="addCartItem" id="999" name="teste" price="100" quantity="1" quantity-max="10">Add to Cart</ngcart-addtocart>
+            <ngcart-addtocart class="addCartItem" id="x" name="teste" price="1" quantity="1" quantity-max="10">Add to Cart</ngcart-addtocart>
         </div>
         <div id="cartCheck" style="display:none">
             <span id="closeCart">X</span>
             <h5>Cart</h5>
             <ngcart-cart></ngcart-cart>
         </div>
-        <div id="topo">
+        <div id="topDiv">
             <div id="logo">
                 <div id="top_logo"> MERLIN'S <span>POTIONS</span></div>
                 <div id="bot_logo">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div id="busca">
+            <div id="searchDiv">
                 <form method="get" action="/search" id="search">
                     <input name="q" type="text" size="40" placeholder="Search our stock" />
                 </form>
@@ -70,18 +70,18 @@
                 Potions
             </div>
         </div>
-        <div id="produtos">
+        <div id="products">
         </div>
 
-        <div id="rodape">
+        <div id="footer">
             <div id="left_container">
-                <div id="menu_rodape">
-                    <ul class="menu_rodape_ul">
-                        <li><a href="#" class="menu_rodape">COMPANY </a></li>
-                        <li><a href="#" class="menu_rodape">CONTACT US </a></li>
-                        <li><a href="#" class="menu_rodape">SHIPPING </a></li>
-                        <li><a href="#" class="menu_rodape">RETURNS </a></li>
-                        <li><a href="#" class="menu_rodape">CAREERS </a></li>
+                <div id="menu_footer">
+                    <ul class="menu_footer_ul">
+                        <li><a href="#" class="menu_footer">COMPANY </a></li>
+                        <li><a href="#" class="menu_footer">CONTACT US </a></li>
+                        <li><a href="#" class="menu_footer">SHIPPING </a></li>
+                        <li><a href="#" class="menu_footer">RETURNS </a></li>
+                        <li><a href="#" class="menu_footer">CAREERS </a></li>
                     </ul>
                 </div>
                 <div id="social">
@@ -110,7 +110,6 @@
         <div class="row">
             <div class="col-md-6">
                 {{ ngCart.getTotalItems() }}
-                <!--<br />{{ ngCart.totalCost() | currency }}-->
             </div>
         </div>
     </script>
@@ -143,7 +142,6 @@
                 <tbody>
                     <tr ng-repeat="item in ngCart.getCart().items track by $index">
                         <td><span ng-click="ngCart.removeItemById(item.getId())" class="glyphicon glyphicon-remove"></span></td>
-
                         <td>{{ item.getName() }}</td>
                         <td>
                             <span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}"
@@ -179,7 +177,7 @@
         </div>
     </script>
 
-    <link rel="stylesheet" type="text/css" href="css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="css/styles_.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Droid+Serif:400,700,400italic|Oswald:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="js/functions.js"></script>
