@@ -1,0 +1,190 @@
+<html>
+<head>	
+</head>
+<body ng-app="myApp">
+    <div ng-controller="myCtrl">
+        <div id="black_overlay"></div>
+        <div id="white_content" style="display: none;">
+            <div id="close_lightbox">X</div>
+            <img id="imagebox" src="images/bulgeye-potion.png">
+            <div id="description">
+                <p class="feature_titles" id="potionName">Bulgeye Potion</p>
+                <p class="feature_titles">Use/Effect:</p>
+                <p class="feature_desc" id="effects">It affects one's eyes, causing them to swell</p>
+                <p class="feature_titles">Ingredients:</p> 
+                <p class="feature_desc" id="composite"></p>              
+                <p class="feature_titles nomargin_padding">Price:</p>
+                <p class="feature_desc price_value" id="price">$19.99</p>
+            </div>
+            <div id="addCartItem"></div>
+            <ngcart-addtocart class="addCartItem" id="999" name="teste" price="100" quantity="1" quantity-max="10">Add to Cart</ngcart-addtocart>
+        </div>
+        <div id="cartCheck" style="display:none">
+            <span id="closeCart">X</span>
+            <h5>Cart</h5>
+            <ngcart-cart></ngcart-cart>
+        </div>
+        <div id="topo">
+            <div id="logo">
+                <div id="top_logo"> MERLIN'S <span>POTIONS</span></div>
+                <div id="bot_logo">
+                    <div id="inner_bot_logo">
+                        <p class="line">
+                            <span> fine potions since 1026 </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="busca">
+                <form method="get" action="/search" id="search">
+                    <input name="q" type="text" size="40" placeholder="Search our stock" />
+                </form>
+            </div>
+            <div id="free_ship">
+                <div id="top_free_ship">Free shipping</div>
+                <div id="bot_free_ship">on orders over $50</div>
+            </div>
+            <div id="bag">
+                <p>
+                    <img id="cartHover" src="images/caldeirao.png">
+                    <span class="bag_text">BAG:</span>
+                    <span class="bag_count"> <ngcart-summary></ngcart-summary> </span>
+                </p>
+            </div>
+        </div>
+        <div id="menu">
+            <ul class="menu">
+                <li><a href="#" class="seta">Potions </a></li>
+                <li><a href="#" class="seta">Ingredients </a></li>
+                <li><a href="#" class="seta">Books </a></li>
+                <li><a href="#" class="seta">Supplies </a></li>
+                <li><a href="#" class="seta">Charms </a></li>
+                <li><a href="#">Clearance! </a></li>
+            </ul>
+            <div id="sign">
+                <a href="#">Sign in </a> <span> or </span> <a href="#"> Sign up</a>
+            </div>
+        </div>
+        <div id="page_title">
+            <div id="page_title_detail">
+                Potions
+            </div>
+        </div>
+        <div id="produtos">
+        </div>
+
+        <div id="rodape">
+            <div id="left_container">
+                <div id="menu_rodape">
+                    <ul class="menu_rodape_ul">
+                        <li><a href="#" class="menu_rodape">COMPANY </a></li>
+                        <li><a href="#" class="menu_rodape">CONTACT US </a></li>
+                        <li><a href="#" class="menu_rodape">SHIPPING </a></li>
+                        <li><a href="#" class="menu_rodape">RETURNS </a></li>
+                        <li><a href="#" class="menu_rodape">CAREERS </a></li>
+                    </ul>
+                </div>
+                <div id="social">
+                    <img src="images/social.png">
+                </div>
+                <div id="rights">
+                    &copy;2015 Merlin's Potions. All Rights Reserved
+                </div>
+            </div>
+            <div id="right_container">
+                <div id="newsletter">
+                    <p id="top_news" class="nomargin_padding">Sign up for our Newsletter</p>
+                    <p id="bot_news">Sign up for our Newsletter & get exclusive discounts!</p>
+                    <div id="email">
+                        <form method="get" action="/submit" id="enter_email">
+                            <input type="text" size="40" placeholder="Enter your email" />
+                            <input type="button" size="40" value="SUBMIT" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/ng-template" id="template/ngCart/summary.html">
+        <div class="row">
+            <div class="col-md-6">
+                {{ ngCart.getTotalItems() }}
+                <!--<br />{{ ngCart.totalCost() | currency }}-->
+            </div>
+        </div>
+    </script>
+
+
+    <script type="text/ng-template" id="template/ngCart/cart.html">
+        <div class="alert alert-warning" role="alert" ng-show="ngCart.getTotalItems() === 0">
+            Your cart is empty
+        </div>
+        <div class="table-responsive col-lg-12" ng-show="ngCart.getTotalItems() > 0">
+            <table class="table table-striped ngCart cart">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tfoot>                    
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total:</td>
+                        <td>{{ ngCart.totalCost() | currency }}</td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr ng-repeat="item in ngCart.getCart().items track by $index">
+                        <td><span ng-click="ngCart.removeItemById(item.getId())" class="glyphicon glyphicon-remove"></span></td>
+
+                        <td>{{ item.getName() }}</td>
+                        <td>
+                            <span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}"
+                                  ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp;
+                            {{ item.getQuantity() | number }}&nbsp;&nbsp;
+                            <span class="glyphicon glyphicon-plus" ng-click="item.setQuantity(1, true)"></span>
+                        </td>
+                        <td>{{ item.getPrice() | currency}}</td>
+                        <td>{{ item.getTotal() | currency }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="template/ngCart/addtocart.html">
+        <div ng-hide="attrs.id">
+            <a class="btn btn-lg btn-primary" ng-disabled="true" ng-transclude></a>
+        </div>
+        <div ng-show="attrs.id">
+            <div>
+                <span ng-show="quantityMax">
+                    <select name="quantity" id="quantity" ng-model="q"
+                            ng-options=" v for v in qtyOpt"></select>
+                </span>
+                <a class="btn btn-sm btn-primary"
+                   ng-click="ngCart.addItem(id, name, price, q, data)"
+                   ng-transclude></a>
+            </div>
+            <mark ng-show="inCart()">
+                This item is in your cart. <a ng-click="ngCart.removeItemById(id)" style="cursor: pointer;">Remove</a>
+            </mark>
+        </div>
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Droid+Serif:400,700,400italic|Oswald:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/bindings.js"></script>
+    <script type="text/javascript" src="js/angular.js"></script>    
+    <script type="text/javascript" src="js/ngCart.js"></script>
+</body>
+</html>
